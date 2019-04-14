@@ -108,6 +108,7 @@ void Class::readFromFile(QString fileName)
         return;
     }
     QTextStream fin(&file);
+    fin.setCodec(QTextCodec::codecForName("utf-8"));
     fin >> n >> m;
     for (int i = 0; i < n; ++i) {
         Student s;
@@ -134,6 +135,7 @@ void Class::writeToFile(QString fileName)
         return;
     }
     QTextStream fout(&file);
+    fout.setCodec(QTextCodec::codecForName("utf-8"));
     fout << n << " " << m << '\n';
     for (int i = 0; i < n; ++i) {
         fout << student[i].name << " ";
