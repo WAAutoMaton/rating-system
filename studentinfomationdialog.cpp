@@ -1,7 +1,8 @@
 #include "studentinfomationdialog.h"
 #include "ui_studentinfomationdialog.h"
-
 #include "core.h"
+
+#include <algorithm>
 
 StudentInfomationDialog::StudentInfomationDialog(QWidget *parent, const Student &student)
     : QDialog(parent)
@@ -23,7 +24,7 @@ StudentInfomationDialog::StudentInfomationDialog(QWidget *parent, const Student 
     ui->ratingTableWidget->setHorizontalHeaderLabels(header);
     for (int i = 1; i <= m; ++i) {
         ui->ratingTableWidget->setItem(i - 1, 0,
-                                       new QTableWidgetItem(QString::number(student.score[i])));
+                                       new QTableWidgetItem(std::abs(student.score[i])<1e-5?QString("未参加"):QString::number(student.score[i])));
         ui->ratingTableWidget->setItem(
             i - 1, 1, new QTableWidgetItem(QString::number(int(student.rating[i]))));
         ui->ratingTableWidget->setItem(
