@@ -18,39 +18,8 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>文件</string>
-       </attribute>
-       <widget class="QPushButton" name="readFileButton">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>60</y>
-          <width>110</width>
-          <height>36</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>读取数据</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="writeFileButton">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>150</y>
-          <width>110</width>
-          <height>36</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>保存数据</string>
-        </property>
-       </widget>
-      </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
         <string>导入成绩</string>
@@ -102,6 +71,23 @@
      <height>17</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="readFileAction"/>
+    <addaction name="writeFileAction"/>
+    <addaction name="separator"/>
+    <addaction name="forceExitAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+    <addaction name="deleteAction"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -112,6 +98,26 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="readFileAction">
+   <property name="text">
+    <string>读取数据</string>
+   </property>
+  </action>
+  <action name="writeFileAction">
+   <property name="text">
+    <string>保存数据</string>
+   </property>
+  </action>
+  <action name="deleteAction">
+   <property name="text">
+    <string>删除比赛</string>
+   </property>
+  </action>
+  <action name="forceExitAction">
+   <property name="text">
+    <string>不保存退出</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

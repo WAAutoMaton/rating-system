@@ -16,7 +16,8 @@ public:
     int n, m;
     void calcAllRating();
     void calcRating(int);
-    void readFromFile(QString = "data.txt");
-    void writeToFile(QString = "data.txt");
+    bool readFromFile(QString = "data.txt");
+    bool writeToFile(QString = "data.txt");
     bool importContent(QString);
+    void deleteContent(int p);
 };

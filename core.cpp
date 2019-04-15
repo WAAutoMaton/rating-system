@@ -4,8 +4,10 @@
 void Class::calcAllRating()
 {
     for (auto &i : student) {
-        i.rating[0] = 1500;
-        i.vol[0] = 250;
+        i.rating.clear();
+        i.vol.clear();
+        i.rating.push_back(1500);
+        i.vol.push_back(250);
     }
     for (int i = 1; i <= m; ++i) {
         calcRating(i);
@@ -96,8 +98,7 @@ void Class::calcRating(int p)
             i.vol[p] = i.vol[p - 1];
         }
 }
-
-void Class::readFromFile(QString fileName)
+bool Class::readFromFile(QString fileName)
 {
     n = m = 0;
     idList.clear();
@@ -105,7 +106,7 @@ void Class::readFromFile(QString fileName)
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << "File Open Error";
-        return;
+        return false;
     }
     QTextStream fin(&file);
     fin.setCodec(QTextCodec::codecForName("utf-8"));
@@ -125,14 +126,16 @@ void Class::readFromFile(QString fileName)
         student.push_back(s);
         idList[s.name] = i;
     }
+    calcAllRating();
+    return true;
 }
 
-void Class::writeToFile(QString fileName)
+bool Class::writeToFile(QString fileName)
 {
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         qDebug() << "File Open Error";
-        return;
+        return false;
     }
     QTextStream fout(&file);
     fout.setCodec(QTextCodec::codecForName("utf-8"));
@@ -144,6 +147,7 @@ void Class::writeToFile(QString fileName)
         }
         fout << '\n';
     }
+    return true;
 }
 
 bool Class::importContent(QString data)
@@ -159,10 +163,24 @@ bool Class::importContent(QString data)
         fin >> name >> score;
         if (idList.count(name) == 0) {
             qDebug() << QString("第%2条，数据库中找不到学生%1").arg(name).arg(i);
-            return false;
+            continue;
         }
         student[idList[name]].score[m + 1] = score;
     }
     m++;
+    calcAllRating();
     return true;
+}
+
+void Class::deleteContent(int p)
+{
+    if (p > m)
+        return;
+    for (auto &i : student) {
+        i.rating.clear();
+        i.vol.clear();
+        i.score.erase(i.score.begin() + p);
+    }
+    --m;
+    calcAllRating();
 }

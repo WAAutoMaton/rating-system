@@ -16,15 +16,22 @@ public:
     ~MainWindow();
     Class c;
     QVector<Student> sortedStudent;
+    bool isForceExit = false;
 
 private slots:
     void on_importButton_clicked();
 
-    void on_writeFileButton_clicked();
-
     void on_refreshRankingButton_clicked();
 
     void on_rankingWidget_cellDoubleClicked(int row, int column);
+
+    void on_readFileAction_triggered();
+
+    void on_writeFileAction_triggered();
+
+    void on_deleteAction_triggered();
+
+    void on_forceExitAction_triggered();
 
 private:
     Ui::MainWindow *ui;
